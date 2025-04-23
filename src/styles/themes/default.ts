@@ -1,0 +1,42 @@
+export const defaultTheme = {
+  colors: {
+    white: "#ffffff",
+    primary: "#7695EC",
+    gray300: "#DDDDDD",
+    gray500: "#777777",
+    gray900: "#000000",
+    disabled: "#C1C9D2",
+    danger: "#FF5151",
+    success: "#47B960",
+  },
+  fontSizes: {
+    xs: "12px",
+    sm: "14px",
+    md: "16px",
+    lg: "18px",
+    xl: "20px",
+    xxl: "24px",
+  },
+  space: {
+    xxs: "4px",
+    xs: "8px",
+    sm: "12px",
+    md: "16px",
+    lg: "18px",
+    xl: "24px",
+    xxl: "54px",
+    xxxl: "90px",
+  },
+  border: {
+    thin: "1px solid",
+    medium: "2px solid",
+    thick: "4px solid",
+  },
+  borderRadius: {
+    thin: "1px",
+    xs: "2px",
+    sm: "4px",
+    md: "8px",
+    full: "999px",
+  },
+};
