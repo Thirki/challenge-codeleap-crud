@@ -5,12 +5,15 @@ import App from "./App.tsx";
 import GlobalStyle from "./styles/globalStyles.ts";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "./styles/themes/default.ts";
+import { LoginProvider } from "./contexts/index.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider theme={defaultTheme}>
-      <App />
-      <GlobalStyle />
+      <LoginProvider>
+        <App />
+        <GlobalStyle />
+      </LoginProvider>
     </ThemeProvider>
   </StrictMode>
 );

@@ -1,18 +1,18 @@
-import { useState } from "react";
 import { Form, Wrapper, Title, Label, Input, Button } from "./styles";
+import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginContext";
 
 export const HomePage = () => {
-  const [name, setName] = useState("");
-
-  const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const formatedText = event.target.value.trimStart();
-    setName(formatedText);
-  };
+  const { login, logout, user } = useLoginContext();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setName("");
+    logout();
     //@TODO: Tratar o nome apos o submit
+  };
+
+  const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const formatedText = event.target.value.trimStart();
+    login(formatedText);
   };
 
   return (
@@ -24,7 +24,7 @@ export const HomePage = () => {
           type="text"
           id="userName"
           placeholder="John doe"
-          value={name}
+          value={user || ""}
           onChange={handleChangeUsername}
         />
         <Button type="submit">Enter</Button>

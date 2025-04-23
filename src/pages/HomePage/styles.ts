@@ -7,6 +7,7 @@ export const Wrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: ${(props) => props.theme.space.md};
 `;
 
 export const Form = styled.form`
