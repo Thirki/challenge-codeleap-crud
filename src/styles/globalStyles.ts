@@ -11,6 +11,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${(props) => props.theme.colors.gray300};
   }
+
+  input::placeholder, textarea::placeholder {
+    color: ${(props) => props.theme.colors.gray400};
+    font-style: normal;
+  }
 `;
 
 export default GlobalStyle;
