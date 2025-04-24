@@ -1,13 +1,14 @@
 import { Form, Wrapper, Title, Label, Input, Button } from "./styles";
 import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginContext";
+import { useNavigate } from "react-router-dom";
 
 export const HomePage = () => {
-  const { login, logout, user } = useLoginContext();
+  const { login, user } = useLoginContext();
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    logout();
-    //@TODO: Tratar o nome apos o submit
+    navigate("/posts");
   };
 
   const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +28,7 @@ export const HomePage = () => {
           value={user || ""}
           onChange={handleChangeUsername}
         />
-        <Button type="submit">Enter</Button>
+        <Button type="submit">ENTER</Button>
       </Form>
     </Wrapper>
   );
