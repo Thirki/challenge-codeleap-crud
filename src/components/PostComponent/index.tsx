@@ -1,10 +1,20 @@
 import { useState } from "react";
 import { PostForm } from "../PostForm";
 import { Wrapper } from "./styles";
+import { UseQueryResult } from "@tanstack/react-query";
+import { IPostResponse } from "../../services/posts";
+import { useCreatePost } from "../../hooks/useCreatePost";
+import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginContext";
 
-export const PostComponent = () => {
+interface PostComponentProps {
+  refetch: () => Promise<UseQueryResult<IPostResponse, unknown>>;
+}
+
+export const PostComponent = ({ refetch }: PostComponentProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const { user } = useLoginContext();
+  const { mutate: createPost, isPending } = useCreatePost();
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatedText = e.target.value.trimStart();
@@ -16,11 +26,21 @@ export const PostComponent = () => {
     setContent(formatedText);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //@TODO: Adicionar tratamento ao dar submit
-    setTitle("");
-    setContent("");
+    try {
+      await createPost({
+        content: content,
+        title: title,
+        username: user || "",
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setTitle("");
+      setContent("");
+      refetch();
+    }
   };
 
   return (
@@ -33,7 +53,7 @@ export const PostComponent = () => {
         contentValue={content}
         setContentValue={handleChangeContent}
         handleSubmit={handleSubmit}
-        isDisabled={!title || !content}
+        isDisabled={!title || !content || isPending}
       />
     </Wrapper>
   );
