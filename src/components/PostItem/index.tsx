@@ -1,7 +1,9 @@
-import { IPost } from "../../services/posts";
-import { getRelativeTimeFromNow } from "../../utils";
 import editIcon from "../../assets/editIcon.svg";
 import trashIcons from "../../assets/trashIcons.svg";
+import { EditModal } from "../EditModal";
+import { IPost } from "../../services/posts";
+import { getRelativeTimeFromNow } from "../../utils";
+import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginContext";
 import {
   Wrapper,
   Header,
@@ -14,14 +16,15 @@ import {
   PostSummaryTitle,
   PostSummaryTime,
 } from "./styles";
-import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginContext";
+import { useState } from "react";
 
 type IPostItemProps = {
   post: IPost;
 };
 
 export const PostItem: React.FC<IPostItemProps> = ({ post }) => {
-  const { user } = useLoginContext();
+  const [isOpenedEdit, setIsOpenedEdit] = useState(false);
+  const { user, setSelectedPost } = useLoginContext();
 
   const handleDelete = () => {
     //@TODO: Adicionar funções
@@ -29,12 +32,18 @@ export const PostItem: React.FC<IPostItemProps> = ({ post }) => {
   };
 
   const handleEdit = () => {
-    //@TODO: Adicionar funções
-    console.log("🚀 ~ handleEdit ~");
+    setIsOpenedEdit(true);
+    setSelectedPost(post);
   };
+
+  const handleCloseEdit = () => {
+    setIsOpenedEdit(false)
+    setSelectedPost(null);
+  }
 
   return (
     <Wrapper>
+      <EditModal isOpenedEdit={isOpenedEdit} handleCloseEdit={handleCloseEdit} />
       <Header>
         <Title>{post.title}</Title>
         {user === post.username && (

@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { PostForm } from "../PostForm";
-import { Button, Wrapper } from "./styles";
-import { useCreatePost } from "../../hooks";
 import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginContext";
+import { PostForm } from "../PostForm";
+import { useUpdatePost } from "../../hooks";
+import { Button, ButtonWrapper, CancellButton } from "./styles";
 
-export const PostComponent = () => {
+interface IPostFormModalEditProps {
+  handleCloseEdit: () => void;
+}
+
+export const PostFormModalEdit: React.FC<IPostFormModalEditProps> = ({
+  handleCloseEdit,
+}) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { user, refetch } = useLoginContext();
-  const { mutate: createPost, isPending } = useCreatePost();
+  const { refetch, selectedPost } = useLoginContext();
+  const { mutate: updatePost, isPending } = useUpdatePost();
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatedText = e.target.value.trimStart();
@@ -20,13 +26,19 @@ export const PostComponent = () => {
     setContent(formatedText);
   };
 
+  const handleCancel = () => {
+    handleCloseEdit();
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await createPost({
-        content: content,
-        title: title,
-        username: user || "",
+      await updatePost({
+        id: selectedPost!.id,
+        payload: {
+          title,
+          content,
+        },
       });
     } catch (error) {
       console.error(error);
@@ -34,24 +46,30 @@ export const PostComponent = () => {
       setTitle("");
       setContent("");
       refetch();
+      handleCancel();
     }
   };
 
   return (
-    <Wrapper>
+    <div>
       <PostForm
-        id="create"
-        title="What’s on your mind?"
+        id="edit"
+        title="Edit item"
         titleValue={title}
         setTitleValue={handleChangeTitle}
         contentValue={content}
         setContentValue={handleChangeContent}
         handleSubmit={handleSubmit}
       >
-        <Button type="submit" disabled={!title || !content || isPending}>
-          Create
-        </Button>
+        <ButtonWrapper>
+          <CancellButton type="reset" onClick={handleCancel}>
+            Cancel
+          </CancellButton>
+          <Button type="submit" disabled={!title || !content || isPending}>
+            Save
+          </Button>
+        </ButtonWrapper>
       </PostForm>
-    </Wrapper>
+    </div>
   );
 };

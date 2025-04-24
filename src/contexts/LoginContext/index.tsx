@@ -2,13 +2,18 @@
 
 import { useState, ReactNode, useMemo, useCallback } from "react";
 import { LoginContext } from "./context";
+import { usePosts } from "../../hooks";
+import { IPost } from "../../services/posts";
 
 type LoginProviderProps = {
   children: ReactNode;
 };
 
 export const LoginProvider = ({ children }: LoginProviderProps) => {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<string | null>("Thirki");
+  const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
+
+  const { data, isLoading, refetch } = usePosts();
 
   const login = useCallback((username: string) => {
     setUser(username);
@@ -23,8 +28,13 @@ export const LoginProvider = ({ children }: LoginProviderProps) => {
       login,
       logout,
       user,
+      data,
+      isLoading,
+      refetch,
+      selectedPost,
+      setSelectedPost
     }),
-    [login, logout, user]
+    [login, logout, user, data, isLoading, refetch, selectedPost, setSelectedPost]
   );
 
   return (

@@ -1,4 +1,4 @@
-import { Form, Title, Label, InputTitle, InputContent, Button } from "./styles";
+import { Form, Title, Label, InputTitle, InputContent } from "./styles";
 
 type IPostFormProps = {
   id: string;
@@ -10,7 +10,7 @@ type IPostFormProps = {
   setTitleValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   contentValue?: string;
   setContentValue: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  isDisabled: boolean;
+  children: React.ReactNode;
 };
 
 export const PostForm: React.FC<IPostFormProps> = ({
@@ -23,7 +23,7 @@ export const PostForm: React.FC<IPostFormProps> = ({
   setTitleValue,
   contentValue = "",
   setContentValue,
-  isDisabled,
+  children,
 }) => {
   return (
     <Form onSubmit={handleSubmit}>
@@ -43,9 +43,7 @@ export const PostForm: React.FC<IPostFormProps> = ({
         placeholder="Content here"
         onChange={setContentValue}
       />
-      <Button type="submit" disabled={isDisabled}>
-        Create
-      </Button>
+      {children}
     </Form>
   );
 };

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginContext";
 import { Header, Wrapper, Text } from "./styles";
 import { PostComponent, PostList } from "../../components";
-import { usePosts } from "../../hooks";
 
 const genericUser = {
   author_ip: "",
@@ -15,8 +14,7 @@ const genericUser = {
 
 export const Posts = () => {
   const navigate = useNavigate();
-  const { user } = useLoginContext();
-  const { data, isLoading, refetch } = usePosts();
+  const { user, data, isLoading } = useLoginContext();
 
   useEffect(() => {
     if (!user) {
@@ -29,7 +27,7 @@ export const Posts = () => {
       <Header>
         <Text>CodeLeap Network</Text>
       </Header>
-      <PostComponent refetch={refetch} />
+      <PostComponent />
       {data?.results.length && <PostList posts={data?.results} />}
       {isLoading && (
         <PostList
