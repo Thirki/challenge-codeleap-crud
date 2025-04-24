@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginContext";
 import { Header, Wrapper, Text } from "./styles";
+import { PostComponent } from "../../components";
 
 export const Posts = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export const Posts = () => {
       <Header>
         <Text>CodeLeap Network</Text>
       </Header>
+      <PostComponent />
     </Wrapper>
   );
 };

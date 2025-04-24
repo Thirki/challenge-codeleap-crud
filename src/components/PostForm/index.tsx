@@ -1,6 +1,7 @@
 import { Form, Title, Label, InputTitle, InputContent, Button } from "./styles";
 
 type IPostFormProps = {
+  id: string;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   title: string;
   titleLabel?: string;
@@ -9,9 +10,11 @@ type IPostFormProps = {
   setTitleValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   contentValue?: string;
   setContentValue: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  isDisabled: boolean;
 };
 
 export const PostForm: React.FC<IPostFormProps> = ({
+  id,
   handleSubmit,
   title,
   titleLabel = "Title",
@@ -20,26 +23,29 @@ export const PostForm: React.FC<IPostFormProps> = ({
   setTitleValue,
   contentValue = "",
   setContentValue,
+  isDisabled,
 }) => {
   return (
-    <Form onClick={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Title>{title}</Title>
       <Label htmlFor="title">{titleLabel}</Label>
       <InputTitle
         value={titleValue}
         type="text"
-        id="title"
+        id={`title-${id}`}
         placeholder="Hello world"
         onChange={setTitleValue}
       />
       <Label htmlFor="content">{contentLabel}</Label>
       <InputContent
         value={contentValue}
-        id="content"
+        id={`content-${id}`}
         placeholder="Content here"
         onChange={setContentValue}
       />
-      <Button type="submit">Create</Button>
+      <Button type="submit" disabled={isDisabled}>
+        Create
+      </Button>
     </Form>
   );
 };

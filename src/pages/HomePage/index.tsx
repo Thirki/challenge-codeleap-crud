@@ -28,7 +28,9 @@ export const HomePage = () => {
           value={user || ""}
           onChange={handleChangeUsername}
         />
-        <Button type="submit">ENTER</Button>
+        <Button type="submit" disabled={!user}>
+          ENTER
+        </Button>
       </Form>
     </Wrapper>
   );

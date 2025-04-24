@@ -53,4 +53,9 @@ export const Button = styled.button`
   align-self: flex-end;
   border-radius: ${(props) => props.theme.borderRadius.md};
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `;
