@@ -22,10 +22,8 @@ export type ICreatePostPayload = {
   content: string;
 };
 
-export const fetchPosts = async (username: string): Promise<IPostResponse> => {
-  const { data } = await api.get("/careers/", {
-    params: { username },
-  });
+export const fetchPosts = async (): Promise<IPostResponse> => {
+  const { data } = await api.get("/careers/");
   return data;
 };
 
