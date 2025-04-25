@@ -13,7 +13,7 @@ export const PostFormModalEdit: React.FC<IPostFormModalEditProps> = ({
 }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { refetch, selectedPost } = useLoginContext();
+  const { selectedPost } = useLoginContext();
   const { mutate: updatePost, isPending } = useUpdatePost();
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +45,6 @@ export const PostFormModalEdit: React.FC<IPostFormModalEditProps> = ({
     } finally {
       setTitle("");
       setContent("");
-      refetch();
       handleCancel();
     }
   };

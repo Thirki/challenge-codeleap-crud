@@ -46,3 +46,7 @@ export const updatePost = async (
   const { data } = await api.patch(`/careers/${id}/`, payload);
   return data;
 };
+
+export const deletePost = async (id: number) => {
+  await api.delete(`/careers/${id}/`);
+};

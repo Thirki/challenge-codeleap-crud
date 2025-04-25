@@ -17,6 +17,7 @@ import {
   PostSummaryTime,
 } from "./styles";
 import { useState } from "react";
+import { DeleteModal } from "../DeleteModal";
 
 type IPostItemProps = {
   post: IPost;
@@ -24,11 +25,12 @@ type IPostItemProps = {
 
 export const PostItem: React.FC<IPostItemProps> = ({ post }) => {
   const [isOpenedEdit, setIsOpenedEdit] = useState(false);
+  const [isOpenedDelete, setIsOpenedDelete] = useState(false);
   const { user, setSelectedPost } = useLoginContext();
 
   const handleDelete = () => {
-    //@TODO: Adicionar funções
-    console.log("🚀 ~ handleDelete ~");
+    setIsOpenedDelete(true);
+    setSelectedPost(post);
   };
 
   const handleEdit = () => {
@@ -37,13 +39,25 @@ export const PostItem: React.FC<IPostItemProps> = ({ post }) => {
   };
 
   const handleCloseEdit = () => {
-    setIsOpenedEdit(false)
+    setIsOpenedEdit(false);
     setSelectedPost(null);
-  }
+  };
+
+  const handleCloseDelete = () => {
+    setIsOpenedDelete(false);
+    setSelectedPost(null);
+  };
 
   return (
     <Wrapper>
-      <EditModal isOpenedEdit={isOpenedEdit} handleCloseEdit={handleCloseEdit} />
+      <EditModal
+        isOpenedEdit={isOpenedEdit}
+        handleCloseEdit={handleCloseEdit}
+      />
+      <DeleteModal
+        isOpenedDelete={isOpenedDelete}
+        handleCloseDelete={handleCloseDelete}
+      />
       <Header>
         <Title>{post.title}</Title>
         {user === post.username && (

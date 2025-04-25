@@ -7,7 +7,7 @@ import { useLoginContext } from "../../contexts/LoginContext/hooks/useLoginConte
 export const PostComponent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { user, refetch } = useLoginContext();
+  const { user } = useLoginContext();
   const { mutate: createPost, isPending } = useCreatePost();
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,6 @@ export const PostComponent = () => {
     } finally {
       setTitle("");
       setContent("");
-      refetch();
     }
   };
 
