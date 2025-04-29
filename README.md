@@ -1,54 +1,91 @@
-# React + TypeScript + Vite
+# Challenge CodeLeap CRUD
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é uma solução para o desafio técnico da **CodeLeap**, que consiste em uma aplicação web do tipo **CRUD (Create, Read, Update, Delete)**. O foco está na **usabilidade**, **atenção aos detalhes**, e **fidelidade ao design fornecido**.
 
-Currently, two official plugins are available:
+🔗 **Repositório:** [https://github.com/Thirki/challenge-codeleap-crud](https://github.com/Thirki/challenge-codeleap-crud)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** — Biblioteca principal de UI
+- **React Router DOM 7** — Navegação entre páginas
+- **React Query (TanStack)** — Gerenciamento de estado assíncrono
+- **Axios** — Requisições HTTP
+- **Styled-Components** — Estilização com CSS-in-JS
+- **React Modal** — Componentes de modal acessíveis
+- **TypeScript** — Tipagem estática
+- **Vite** — Bundler moderno e rápido
+- **ESLint** — Padronização de código
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 📦 Requisitos de Ambiente
+
+- **Node.js v22**
+- **Yarn** (obrigatório)
+
+---
+
+## 🧑‍💻 Como Rodar o Projeto
+
+1. **Clone o repositório:**
+
+```bash
+git clone https://github.com/Thirki/challenge-codeleap-crud.git
+cd challenge-codeleap-crud
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Instale as dependências com Yarn:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+yarn install
 ```
+
+3. **Inicie o servidor de desenvolvimento:**
+
+```bash
+yarn dev
+```
+
+4. **Build para produção:**
+
+```bash
+yarn build
+```
+
+5. **Pré-visualize o build:**
+
+```bash
+yarn preview
+```
+
+---
+
+## ✅ Funcionalidades
+
+- 📄 Listagem de posts
+- ✍️ Criação de novo post
+- ✏️ Edição de post existente
+- 🗑️ Exclusão de post
+- 👤 Filtro por autor do post
+- 📱 Interface responsiva
+
+---
+
+## 🎯 Objetivo
+
+Criar uma aplicação web que seja:
+
+- **Fiel ao layout fornecido**
+- **Clara e intuitiva para o usuário final**
+- **Consistente visualmente**
+- **Rápida de desenvolver e manter**
+
+---
+
+## 📝 Observações
+
+- O projeto é voltado exclusivamente para fins de avaliação técnica.
+- Nenhuma dependência desnecessária foi adicionada.
+- Todo o código está estruturado com foco em reutilização e manutenibilidade.
